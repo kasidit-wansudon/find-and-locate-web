@@ -5,22 +5,27 @@ interface GeoState {
   lng: number | null;
   error: string | null;
   loading: boolean;
+  denied: boolean;
 }
-
-// Default: Bangkok center
-const BANGKOK = { lat: 13.7563, lng: 100.5018 };
 
 export function useGeolocation() {
   const [state, setState] = useState<GeoState>({
-    lat: BANGKOK.lat,
-    lng: BANGKOK.lng,
+    lat: null,
+    lng: null,
     error: null,
     loading: true,
+    denied: false,
   });
 
   useEffect(() => {
     if (!navigator.geolocation) {
-      setState(s => ({ ...s, loading: false, error: 'Geolocation not supported' }));
+      setState({
+        lat: null,
+        lng: null,
+        error: 'เบราว์เซอร์ไม่รองรับการระบุตำแหน่ง',
+        loading: false,
+        denied: true,
+      });
       return;
     }
 
@@ -31,11 +36,20 @@ export function useGeolocation() {
           lng: pos.coords.longitude,
           error: null,
           loading: false,
+          denied: false,
         });
       },
-      () => {
-        // Use Bangkok default if denied
-        setState(s => ({ ...s, loading: false }));
+      (err) => {
+        setState({
+          lat: null,
+          lng: null,
+          error:
+            err.code === 1
+              ? 'กรุณาอนุญาตการเข้าถึงตำแหน่งเพื่อค้นหาร้านค้าใกล้คุณ'
+              : 'ไม่สามารถระบุตำแหน่งได้ กรุณาลองใหม่อีกครั้ง',
+          loading: false,
+          denied: true,
+        });
       },
       { timeout: 5000 }
     );
