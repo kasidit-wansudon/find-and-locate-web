@@ -1,5 +1,5 @@
 const API_BASE = import.meta.env.PROD
-  ? 'https://find-api.kasidit-wans.com'
+  ? 'https://find-and-locate.kasidit-wans.workers.dev/api'
   : '/api';
 
 async function fetchApi<T>(path: string): Promise<T> {
