@@ -8,8 +8,8 @@ export default function Layout() {
       {/* Header */}
       <header className="bg-white border-b border-gray-100 sticky top-0 z-50">
         <div className="max-w-5xl mx-auto px-4 h-16 flex items-center justify-between">
-          <Link to="/" className="flex items-center gap-2">
-            <span className="text-2xl">📍</span>
+          <Link to="/" className="flex items-center gap-2.5">
+            <img src="/favicon.svg" alt="หาของ logo" className="w-8 h-8" />
             <span className="font-bold text-xl text-gray-900">หาของ</span>
             <span className="text-sm text-gray-400 hidden sm:block">Find & Locate</span>
           </Link>

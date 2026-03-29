@@ -34,7 +34,7 @@ export default function AdminLayout() {
         {/* Logo */}
         <div className="px-5 py-5 border-b border-gray-700">
           <div className="flex items-center gap-2">
-            <span className="text-xl">🔍</span>
+            <img src="/favicon.svg" alt="logo" className="w-7 h-7" />
             <div>
               <div className="font-bold text-sm text-white leading-tight">Find & Locate</div>
               <div className="text-xs text-gray-400">Admin Dashboard</div>
